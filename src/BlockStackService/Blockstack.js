@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Button, Segment, Input } from 'semantic-ui-react';
+// import { Container, Button, Segment, Input } from 'semantic-ui-react';
 import {
   isSignInPending,
   isUserSignedIn,
   redirectToSignIn,
-  loadUserData,
+  // loadUserData,
   handlePendingSignIn,
-  putFile,
-  getFile,
+  // putFile,
+  // getFile,
   signUserOut,
 } from 'blockstack';
 
@@ -20,13 +20,13 @@ class Blockstack extends Component {
       q: '',
       counter: 0,
     }
-    this.loadTransactionOfUser = this.loadTransactionOfUser.bind(this);
+    // this.loadTransactionOfUser = this.loadTransactionOfUser.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
     this.checkIfUserIsSignIn = this.checkIfUserIsSignIn.bind(this);
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleSubmitTransaction = this.handleSubmitTransaction.bind(this);
-    this.getData = this.getData.bind(this);
+    // this.handleOnChange = this.handleOnChange.bind(this);
+    // this.handleSubmitTransaction = this.handleSubmitTransaction.bind(this);
+    // this.getData = this.getData.bind(this);
   }
 
   componentWillMount() {
@@ -37,20 +37,20 @@ class Blockstack extends Component {
     }
   }
 
-  componentDidMount() {
-    this.loadTransactionOfUser();
-  }
-
-  async loadTransactionOfUser () {
-    const userData = loadUserData();
-    const options = { decrypt: false };
-    const response = await getFile('transaction.json', options);
-    console.log(response, 'load data of user', userData);
-    const counter = response.transaction.length + 1;
-
-    console.log(userData, response.transaction);
-    this.setState({ userData, transaction: response.transaction, counter });
-  }
+  // componentDidMount() {
+  //   this.loadTransactionOfUser();
+  // }
+  //
+  // async loadTransactionOfUser () {
+  //   const userData = loadUserData();
+  //   const options = { decrypt: false };
+  //   const response = await getFile('transaction.json', options);
+  //   console.log(response, 'load data of user', userData);
+  //   const counter = response.transaction.length + 1;
+  //
+  //   console.log(userData, response.transaction);
+  //   this.setState({ userData, transaction: response.transaction, counter });
+  // }
 
   handleSignIn(e) {
     e.preventDefault();
@@ -70,89 +70,49 @@ class Blockstack extends Component {
     }
   }
 
-  handleOnChange(e, { value }) {
-    this.setState({ q: value });
-  };
-
-  async handleSubmitTransaction() {
-    // allow users to be able to see data
-    const options = { encrypt: false };
-
-    const dataObject = {
-      id: this.state.counter,
-      type: '',
-      publickey: '',
-      portion: '',
-      asset: '',
-      UID: '',
-      amount: '',
-      payload: this.state.q,
-      created_at: Date.now(),
-    }
-
-    const transaction = [...this.state.transaction, dataObject];
-    const response = await putFile('transaction.json', JSON.stringify({ transaction }), options);
-    // load data after getting the response
-    this.loadTransactionOfUser();
-    console.log(response);
-  }
-
-  async getData() {
-    // check if this is fixed
-    const options = { decrypt: false };
-    const response = await getFile('transaction.json', options);
-    console.log(JSON.parse(response).transaction);
-    return response;
-  }
+  // handleOnChange(e, { value }) {
+  //   this.setState({ q: value });
+  // };
+  //
+  // async handleSubmitTransaction() {
+  //   // allow users to be able to see data
+  //   const options = { encrypt: false };
+  //
+  //   const dataObject = {
+  //     id: this.state.counter,
+  //     type: '',
+  //     publickey: '',
+  //     portion: '',
+  //     asset: '',
+  //     UID: '',
+  //     amount: '',
+  //     payload: this.state.q,
+  //     created_at: Date.now(),
+  //   }
+  //
+  //   const transaction = [...this.state.transaction, dataObject];
+  //   const response = await putFile('transaction.json', JSON.stringify({ transaction }), options);
+  //   // load data after getting the response
+  //   this.loadTransactionOfUser();
+  //   console.log(response);
+  // }
+  //
+  // async getData() {
+  //   // check if this is fixed
+  //   const options = { decrypt: false };
+  //   const response = await getFile('transaction.json', options);
+  //   console.log(JSON.parse(response).transaction);
+  //   return response;
+  // }
 
   render() {
-    const dataList = this.state.transaction.map((trx) => (
-        <li key={trx.id}>
-          { trx.id }
-        </li>
-    ));
 
     return (
-      <Container>
-        <p>
-          Test Block
-        </p>
-        <Segment>
-          <Button
-            onClick={e => this.handleSignIn(e)}
-          >Sign In
-          </Button>
-          <Button
-            onClick={() => this.checkIfUserIsSignIn()}
-          >Check Sign In
-          </Button>
-          <Button
-            onClick={e => this.handleSignOut(e)}
-          >Sign Out
-          </Button>
-        </Segment>
-
-        <Segment>
-          <Input
-            placeholder="...data to save"
-            onChange={this.handleOnChange}
-          ><input />
-            <Button type="submit" onClick={this.handleSubmitTransaction}>
-              Save Data to Blockstack
-            </Button>
-          </Input>
-          <br />
-          <Button type="submit" onClick={this.getData}>
-            Fetch Saved Data
-          </Button>
-        </Segment>
-
-        <Segment>
-          <ul>
-            { dataList }
-          </ul>
-        </Segment>
-      </Container>
+      <div className="col col-sm-12">
+        <button className="btn btn-primary" onClick={e => this.handleSignIn(e)}>
+          Press to Start
+        </button>
+      </div>
     );
   }
 }
