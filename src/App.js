@@ -10,6 +10,7 @@ import BottomMenu from './components/BottomMenu';
 import PaymentForm from './components/PaymentForm';
 import Transaction from './components/Transaction';
 import Initializer from './components/Initializer';
+import Storage from './components/Storage';
 
 import TransactionFromList from './components/TransactionFromList';
 import Authentication from './components/Authentication';
@@ -152,7 +153,7 @@ class App extends Component {
   };
 
   render() {
-    
+
     return (
       <div className="container App">
         <div className="row no-gutters">
@@ -160,7 +161,7 @@ class App extends Component {
             <Balance balance={this.state.balance} />
             <Switch>
               <Route exact path="/auth" component={Authentication} />
-              <Route exact path="/" 
+              <Route exact path="/"
                 render={(props) => (
                   <Initializer
                     handleCreateWallet={this.handleCreateWallet}
@@ -194,11 +195,11 @@ class App extends Component {
                     simpleBalance={this.state.simpleBalance}
                     checkBalance={this.checkBalance}
                     type={this.state.type}
-                  />  
+                  />
                 )}
                 />
                 <Route exact path="/transaction/:id" render={props => (
-                  <TransactionFromList 
+                  <TransactionFromList
                     valueAmount={this.state.valueAmount}
                     valuePubKey={this.state.valuePubKey}
                     valueCurrency={this.state.valueCurrency}
@@ -212,7 +213,7 @@ class App extends Component {
                   />
                 )}
                 />
-              <Route exact path="/test" component={Blockstack} />
+              <Route exact path="/storage" component={Storage} />
             </Switch>
             <BottomMenu botomMenuList={this.state.botomMenuList}/>
           </div>

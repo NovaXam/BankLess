@@ -1,6 +1,7 @@
 import React from 'react';
 import '../style/authenticate.css';
 import Bankless from '../assets/bankless24-logo.jpg';
+import Blockstack from '../BlockStackService/Blockstack';
 
 const Authentication = (props) => {
     return (
@@ -12,9 +13,7 @@ const Authentication = (props) => {
                     </div>
                 </div>
                 <div className="row no-gutters mainBut">
-                    <div className="col col-sm-12">
-                        <a href="" className="btn btn-primary">PRESS TO START</a>
-                    </div>
+                    <Blockstack />
                 </ div>
             </div>
         </div>
