@@ -29,7 +29,7 @@ const TransactionsList = (props) => {
                     {
                         props.transactions.map((elem, i) => {
                             const porID = `${Object.keys(elem)[0]}`;
-                            let type, address, color = null, transaction = `transaction/${elem.publicKey.substring(0,5)}`;
+                            let type, address, color = null, transaction = `transaction/${elem.publicKey.substring(0, 5)}`;
                             elem.type == "debit" ? type = UP : type = DOWN;
                             i % 2 === 0 ? color="rgba(235,244,255,0.75)" : "white";
                             return (

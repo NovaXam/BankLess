@@ -10,11 +10,13 @@ import BottomMenu from './components/BottomMenu';
 import PaymentForm from './components/PaymentForm';
 import Transaction from './components/Transaction';
 import Initializer from './components/Initializer';
+
 import TransactionFromList from './components/TransactionFromList';
 import Authentication from './components/Authentication';
+import Blockstack from './BlockStackService/Blockstack';
 
 import {Portions} from "./storage/Portions";
-import {Transactions} from './storage/Transactions'; 
+import {Transactions} from './storage/Transactions';
 
 import './App.css';
 import TransactionsList from './components/TransactionsList';
@@ -62,22 +64,22 @@ class App extends Component {
   handleFillForm(e) {
     e.preventDefault();
     switch(e.target.name) {
-      case "pubKey": 
+      case "pubKey":
         this.setState({
           valuePubKey: e.target.value
         })
       break;
-      case "amount": 
+      case "amount":
         this.setState({
           valueAmount: e.target.value
         })
       break;
-      case "currency": 
+      case "currency":
         this.setState({
           valueCurrency: e.target.value
         })
       break;
-      case "portion": 
+      case "portion":
         this.setState({
           valuePortion: e.target.value
         })
@@ -97,10 +99,10 @@ class App extends Component {
       qs: { addr: Keypair.publicKey() },
       json: true
     },((error, response, body) => {
-      error || response.statusCode !== 200 
-      ? 
-      console.error("something went wrong", body || error) 
-      : 
+      error || response.statusCode !== 200
+      ?
+      console.error("something went wrong", body || error)
+      :
       console.log("WALLET CREATED SUCCESSFULLY! \n", body )
       })
     )
@@ -121,8 +123,9 @@ class App extends Component {
     });
   };
 
-  handleCreateWallet = async (e) => {
+  async handleCreateWallet(e){
     try {
+      console.log(e);
       if (process.env.REACT_APP_SECRET !== undefined) {
       const balance = await this.checkBalance(process.env.REACT_APP_SECRET)
       } else {
@@ -151,22 +154,22 @@ class App extends Component {
   render() {
     
     return (
-      <div className="container App">       
+      <div className="container App">
         <div className="row no-gutters">
           <div className="col col-sm-12">
             <Balance balance={this.state.balance} />
             <Switch>
-              <Route exact path="/auth" component={Authentication}/>
+              <Route exact path="/auth" component={Authentication} />
               <Route exact path="/" 
                 render={(props) => (
-                  <Initializer 
+                  <Initializer
                     handleCreateWallet={this.handleCreateWallet}
                   />
-                )} 
-              />  
-              <Route exact path="/home"  
+                )}
+              />
+              <Route exact path="/home"
                 render={props => (
-                  <BasicPage 
+                  <BasicPage
                     dataGraphs={this.state.dataGraphs}
                   />
                 )}
@@ -206,6 +209,10 @@ class App extends Component {
                   />
                 )}
                 />
+                  />
+                )}
+                />
+              <Route exact path="/test" component={Blockstack} />
             </Switch>
             <BottomMenu botomMenuList={this.state.botomMenuList}/>
           </div>
@@ -213,6 +220,6 @@ class App extends Component {
       </div>
     );
   }
-}
+};
 
 export default App;

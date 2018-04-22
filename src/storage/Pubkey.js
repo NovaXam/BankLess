@@ -1,0 +1,1 @@
+// export const pair = StellarSdk.Keypair.random();
