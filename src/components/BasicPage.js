@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {Portions} from "../storage/Portions";
 import {Transactions} from '../storage/Transactions';
 
@@ -7,6 +8,8 @@ import PortionList from './PortionsList';
 import TransactionsList from './TransactionsList';
 
 import '../style/basicPage.css';
+
+
 
 class BasicPage extends Component {
     constructor(props) {
@@ -17,6 +20,22 @@ class BasicPage extends Component {
         }
     };
 
+   componentWillMount ( ){
+       let userID  ='GBV3I3QJQ3TNLPWONBXSRVLB5V3JEIMARKLXOTILQSQVXSIMPZ6JWHBT';
+        let tranUrl =`/api/Transactions/${userID}`;
+        let portionUrl =`/api/Portions/${userID}`;
+        Promise.all([axios(tranUrl),axios(portionUrl)])         
+         .then(res => { 
+                console.log(res);
+                this.props.getTransations(res[0].data);
+                this.setState({
+                    transactions: res[0].data,
+                    portions: res[1].data
+                })
+
+          } );
+   }
+
 render() {
     return(
         <div className="row no-gutters">
@@ -25,7 +44,9 @@ render() {
                     <Graph />
                     <PortionList portions={this.state.portions}/>
                 </section>
-                <TransactionsList transactions={this.state.transactions} />
+                <TransactionsList 
+                    transactions={this.state.transactions} 
+                />
             </div>
         </div>
         )

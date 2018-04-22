@@ -29,17 +29,17 @@ const TransactionsList = (props) => {
                     {
                         props.transactions.map((elem, i) => {
                             const porID = `${Object.keys(elem)[0]}`;
-                            let type, address, color = null, transaction = `transaction/${elem.publicKey.substring(0, 5)}`;
+                            let type, address, color = null, transaction = `transaction/${i}`;
                             elem.type == "debit" ? type = UP : type = DOWN;
                             i % 2 === 0 ? color="rgba(235,244,255,0.75)" : "white";
                             return (
                             <Link to={transaction} key={i*5}>
-                                <div className="row no-gutters transaction" style={{background: color}}>
+                                <div  className="row no-gutters transaction" style={{background: color}}>
                                     <div className="col col-sm-1 type" style={{maxWidth: "2rem"}}>
                                         <img src={type} alt="sign" style={{margin: " 1rem auto"}}/>
                                     </div>
                                     <div className="col col-sm-6" style={{maxWidth: "11.5rem"}}>
-                                        <h6 style={{fontSize: "10px", margin: " 1rem auto"}}>{elem.publicKey}</h6>
+                                        <h6 style={{fontSize: "10px", margin: " 1rem auto"}}>{elem.publicKey.substring(0, 10)}...</h6>
                                     </div>
                                     <div className="col col-sm-2" style={{maxWidth: "4.5rem"}}>
                                         <h6 style={{fontSize: "12px", margin: " 1rem auto"}}>{elem.portion}</h6>

@@ -1,6 +1,7 @@
 {
   "name": "smartwallet",
   "version": "0.1.0",
+   "proxy": "http://localhost:37139",
   "babel": {
     "presets": [
       "react-app"

@@ -31,18 +31,23 @@ class App extends Component {
       balance: [{XLM: [0, 0], exch: 0.54}, {ETH: [0, 0], exch: 200.54}, {BTC: [0, 0], exch: 54.78}],
       dataGraphs: [],
       botomMenuList: ["Home", "Pay", "Portion", "Storage"],
+      transactions: [],
       valuePubKey: "",
       valueCurrency: "",
       valuePortion: "",
       valueAmount: "",
       type: "",
     }
+
+
+
     this.handleFillForm = this.handleFillForm.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleCreateWallet = this.handleCreateWallet.bind(this);
     this.createWallet = this.createWallet.bind(this);
     this.checkBalance = this.checkBalance.bind(this);
     this.formDataForTransaction = this.formDataForTransaction.bind(this);
+    this.getTransations = this.getTransations.bind(this);
   };
 
   componentWillMount() {
@@ -128,20 +133,33 @@ class App extends Component {
   async handleCreateWallet(e){
     try {
       console.log(e);
+
+      console.log(process);
+      console.log(process.env);
+      console.log(process.env.REACT_APP_SECRET);
+
       if (process.env.REACT_APP_SECRET !== undefined) {
       const balance = await this.checkBalance(process.env.REACT_APP_SECRET)
       } else {
-      const keyPair = await StellarSdk.Keypair.random()
-      const newWallet = await this.createWallet(keyPair)
+      //const keyPair = await StellarSdk.Keypair.random()
+      //const newWallet = await this.createWallet(keyPair)
       }
     }catch(err) {
       console.log(err);
     };
   };
 
+  getTransations(transaction) {
+    console.log(transaction)
+    this.setState({
+      transactions: transaction
+    });
+  };
+
   formDataForTransaction(id) {
-    const transaction = Transactions.filter((elem, i) => {
-      return elem.publicKey.substring(0, 5) == id;
+    console.log(id, this.state.transactions)
+    const transaction = this.state.transactions.filter((elem, i) => {
+      return i == id;
     });
     this.setState({
       valuePubKey: transaction[0].publicKey,
@@ -173,6 +191,7 @@ class App extends Component {
                 render={props => (
                   <BasicPage
                     dataGraphs={this.state.dataGraphs}
+                    getTransations={this.getTransations}
                   />
                 )}
               />
@@ -189,13 +208,15 @@ class App extends Component {
               <Route exact path="/transaction"
                 render={props => (
                   <Transaction
-                    valueAmount={this.state.valueAmount}
-                    valuePubKey={this.state.valuePubKey}
-                    valueCurrency={this.state.valueCurrency}
-                    valuePortion={this.state.valuePortion}
-                    simpleBalance={this.state.simpleBalance}
-                    checkBalance={this.checkBalance}
-                    type={this.state.type}
+                  id={"1EANZhqWTAV7vwMWJqTcAF4ZauvBNi5Ui3"}
+                  amount={this.state.valueAmount}
+                  publicKey={this.state.valuePubKey}
+                  currency={this.state.valueCurrency}
+                  portion={this.state.valuePortion}
+                  balance={this.state.simpleBalance}
+                  checkBalance={this.checkBalance}
+                  type={this.state.type}
+                  date={null}
                   />
                 )}
                 />

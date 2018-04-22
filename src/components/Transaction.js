@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import StellarSdk from 'stellar-sdk';
 import ReactLoading from 'react-loading';
 
+import axios from 'axios';
+
 import '../style/transaction.css';
 
 class Transaction extends Component {
@@ -18,6 +20,15 @@ class Transaction extends Component {
     }
     
     componentWillReceiveProps(nextProps) {
+    
+        axios({
+            method: "POST",
+            url:"api/Transactions",
+            data: nextProps
+        })
+        .then((res) => {
+            console.log(res);
+        })
     };
 
     makePayment() {
@@ -25,9 +36,9 @@ class Transaction extends Component {
         StellarSdk.Network.useTestNetwork();
         var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
         var sourceKeys = StellarSdk.Keypair.fromSecret(`${process.env.REACT_APP_SECRET}`);
-        var destinationId = this.props.valuePubKey;
+        var destinationId = this.props.publicKey;
         var transaction;
-        var amount = this.props.valueAmount;
+        var amount = this.props.amount;
         
         server.loadAccount(destinationId)
         .catch(StellarSdk.NotFoundError, function (error) {
@@ -49,6 +60,26 @@ class Transaction extends Component {
         return server.submitTransaction(transaction);
         })
         .then(function(result) {
+            console.log('Success! Results:', result);
+            self.setState({
+                transactionResult: true
+                })
+            })
+            .then(() => {
+                return self.props.checkBalance(sourceKeys.secret());
+            })
+            
+            .catch(function(error) {
+            console.error('Something went wrong!', error);
+            // server.submitTransaction(transaction);
+            self.setState({
+                transactionResult: false
+            });
+            })      
+
+        /*
+        .then(function(result) {
+            
         console.log('Success! Results:', result);
         self.setState({
             transactionResult: true
@@ -62,8 +93,9 @@ class Transaction extends Component {
         // server.submitTransaction(transaction);
         self.setState({
             transactionResult: false
-        });
+        });        
         })
+        */
     };
 
     render() {
@@ -93,7 +125,7 @@ class Transaction extends Component {
                                     <h5>Recepient:</h5>
                                 </div>
                                 <div className="col col-sm-4 right">
-                                    <h5>{this.props.valuePubKey.substring(0, 10)}...</h5> 
+                                    <h5>{this.props.publicKey.substring(0, 10)}...</h5> 
                                 </div>
                             </div>
                             <div className="row no-gutters transBodyline">
@@ -101,7 +133,7 @@ class Transaction extends Component {
                                     <h5>Amount:</h5>
                                 </div>
                                 <div className="col col-sm-4 right">
-                                    <h5>{this.props.valueAmount} <span>{this.props.valueCurrency}</span></h5>
+                                    <h5>{this.props.amount} <span>{this.props.currency}</span></h5>
                                 </div>
                             </div>
                             <div className="row no-gutters transBodyline">
@@ -109,7 +141,7 @@ class Transaction extends Component {
                                     <h5>Portion:</h5>
                                 </div>
                                 <div className="col col-sm-4 right">
-                                    <h5> {this.props.valuePortion}</h5>
+                                    <h5> {this.props.portion}</h5>
                                 </div>
                             </div>
                             <div className="row no-gutters transBodyline">
@@ -117,7 +149,7 @@ class Transaction extends Component {
                                     <h5>Balance:</h5>
                                 </div>
                                 <div className="col col-sm-4 rigth">
-                                <h5> {this.props.simpleBalance} <span>{this.props.valueCurrency}</span> </h5>
+                                <h5> {this.props.balance} <span>{this.props.currency}</span> </h5>
                                 </div>
                             </div>
                             <div className="row no-gutters transBodyline">
