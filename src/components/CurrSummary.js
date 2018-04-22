@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Segment } from 'semantic-ui-react';
+import arrowUp from '../assets/svg/arrow-thick-top.svg';
+import arrowDown from '../assets/svg/arrow-thick-bottom.svg';
+import '../style/currsummary.css';
 
 class CurrSummary extends Component {
   // this.props.currency
@@ -25,11 +27,14 @@ class CurrSummary extends Component {
 
   render() {
     return (
-      <Segment color="red" className="currSummary">
-        <p>
-          { this.props.currency } {this.state.currentChange}%
-        </p>
-      </Segment>
+      <li className="list-group-item">
+        { this.props.currency }: {this.state.currentChange}% &nbsp; &nbsp;
+        { this.state.currentChange > 0 ?
+            <img src={arrowUp} className="currSummaryIcon" alt="icon name" />
+          :
+            <img src={arrowDown} className="currSummaryIcon" alt="icon name" />
+        }
+      </li>
     )
   }
 }

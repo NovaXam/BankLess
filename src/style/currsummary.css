@@ -1,3 +1,7 @@
 .currSummary {
   margin-bottom: 10px !important;
 }
+
+.currSummaryIcon {
+  width: 10% !important;
+}

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Segment } from 'semantic-ui-react';
-import axios from 'axios';
 import { Transactions } from '../storage/Transactions';
 import CurrSummary from './CurrSummary';
+import StorageChart from './StorageChart';
 
 class Storage extends Component {
   constructor(props) {
@@ -33,17 +32,24 @@ class Storage extends Component {
 
   render() {
     const currList = this.state.collection.map((ele, idx) => (
-      <Segment key={idx} className="currSummary">
-        <CurrSummary
-          currency={ele}
-        />
-      </Segment>
+      <div className="card" key={idx}>
+        <div className="card-body">
+          <StorageChart
+            coin={ele}
+          />
+          <CurrSummary
+            currency={ele}
+          />
+        </div>
+      </div>
     ))
 
     return (
-      <Container>
-        { currList }
-      </Container>
+      <div>
+        <h3 className="card-title">Crypto Snapshot</h3>
+        <p className="card-text">Consolidated Summary</p>
+        {  currList }
+      </div>
     );
   }
 }

@@ -31,6 +31,7 @@
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
+    "highcharts": "^6.1.0",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "object-assign": "4.1.1",
@@ -41,7 +42,11 @@
     "react": "^16.3.2",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.2",
+<<<<<<< HEAD
+    "react-highcharts": "^16.0.2",
+=======
     "react-easy-chart": "^1.0.0",
+>>>>>>> f69b4c5c456acf48cfd2032cea133fd5427dc37f
     "react-loading": "^2.0.2",
     "resolve": "1.6.0",
     "semantic-ui-react": "^0.79.1",
