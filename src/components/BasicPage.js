@@ -44,7 +44,7 @@ class BasicPage extends Component {
         .then((resp) => {
             var newy = [];
             for (var i = 0; i < portions.length; i++){
-                newy.push({name: portions[i].name, balance: Math.round(resp.data[portions[i].currency].USD*portions[0].balance).toFixed(2)});
+                newy.push({name: portions[i].name, currency: 'USD', balance: Math.round(resp.data[portions[i].currency].USD*portions[0].balance).toFixed(2)});
             }
             console.log(newy);
             return  this.setState({data: newy});          
