@@ -3,6 +3,7 @@ import React from 'react';
 import '../style/portionsList.css';
 
 const PortionList = (props) => {
+    console.log(props);
     return (
         <aside className="col col-xm-4 portionList"> 
             {
