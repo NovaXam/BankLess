@@ -8,8 +8,6 @@ import PortionList from './PortionsList';
 import TransactionsList from './TransactionsList';
 
 import '../style/basicPage.css';
-import axios from 'axios';
-
 
 
 
@@ -41,7 +39,7 @@ class BasicPage extends Component {
             if ( i !== portions.length - 1)
             api+= ',';
         }
-    
+
         console.log(api);
         axios.get(api)
         .then((resp) => {
@@ -50,7 +48,7 @@ class BasicPage extends Component {
                 newy.push({name: portions[i].name, currency: 'USD', balance: Math.round(resp.data[portions[i].currency].USD*portions[0].balance).toFixed(2)});
             }
             console.log(newy);
-            return  this.setState({data: newy});          
+            return  this.setState({data: newy});
         });
     };
 
@@ -58,8 +56,8 @@ class BasicPage extends Component {
        let userID  ='GBV3I3QJQ3TNLPWONBXSRVLB5V3JEIMARKLXOTILQSQVXSIMPZ6JWHBT';
         let tranUrl =`/api/Transactions/${userID}`;
         let portionUrl =`/api/Portions/${userID}`;
-        Promise.all([axios(tranUrl),axios(portionUrl)])         
-         .then(res => { 
+        Promise.all([axios(tranUrl),axios(portionUrl)])
+         .then(res => {
                 console.log(res);
                 this.props.getTransations(res[0].data);
                 this.setState({
@@ -73,13 +71,13 @@ class BasicPage extends Component {
 render() {
     return(
         <div className="row no-gutters">
-            <div className="col col-sm-12 basicPage"> 
-                <section className="row no-gutters middleSection"> 
+            <div className="col col-sm-12 basicPage">
+                <section className="row no-gutters middleSection">
                     <Graph portions={this.state.data}/>
                     <PortionList portions={this.state.data}/>
                 </section>
-                <TransactionsList 
-                    transactions={this.state.transactions} 
+                <TransactionsList
+                    transactions={this.state.transactions}
                 />
             </div>
         </div>
