@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import '../style/bottomMenu.css';
 
 const BottomMenu = (props) => {
+    let acticeStatus;
+    process.env.REACT_APP_SECRET == undefined ? acticeStatus = "disabled" : acticeStatus = "able";
     return (
         <footer className="row no-gutters align-items-center bottomMenu">
             {

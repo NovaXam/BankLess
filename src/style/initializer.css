@@ -6,6 +6,7 @@
 .createWalleField button {
     height: 10%;
     width: 70%;
+    font-size: 27px;
 }
 
 .createWalleField img {

@@ -10,11 +10,14 @@ import BottomMenu from './components/BottomMenu';
 import PaymentForm from './components/PaymentForm';
 import Transaction from './components/Transaction';
 import Initializer from './components/Initializer';
+import TransactionFromList from './components/TransactionFromList';
+import Authentication from './components/Authentication';
 
 import {Portions} from "./storage/Portions";
 import {Transactions} from './storage/Transactions'; 
 
 import './App.css';
+import TransactionsList from './components/TransactionsList';
 
 class App extends Component {
   constructor(props) {
@@ -28,12 +31,14 @@ class App extends Component {
       valueCurrency: "",
       valuePortion: "",
       valueAmount: "",
+      type: "",
     }
     this.handleFillForm = this.handleFillForm.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleCreateWallet = this.handleCreateWallet.bind(this);
     this.createWallet = this.createWallet.bind(this);
     this.checkBalance = this.checkBalance.bind(this);
+    this.formDataForTransaction = this.formDataForTransaction.bind(this);
   };
 
   componentWillMount() {
@@ -109,8 +114,9 @@ class App extends Component {
       account.balances.forEach(balance => {
         console.log('Type:', balance.asset_type, ', Balance:', balance.balance);
         this.setState({
-          simpleBalance: balance.balance
-        })
+          simpleBalance: balance.balance,
+          type: "credit"
+        });
       });
     });
   };
@@ -128,13 +134,29 @@ class App extends Component {
     };
   };
 
+  formDataForTransaction(id) {
+    const transaction = Transactions.filter((elem, i) => {
+      return elem.publicKey.substring(0, 5) == id;
+    });
+    this.setState({
+      valuePubKey: transaction[0].publicKey,
+      valueCurrency: transaction[0].currency,
+      valuePortion: transaction[0].portion,
+      valueAmount: transaction[0].amount,
+      simpleBalance: transaction[0].balance,
+      type: transaction[0].type
+    });
+  };
+
   render() {
+    
     return (
       <div className="container App">       
         <div className="row no-gutters">
           <div className="col col-sm-12">
-            <Balance balance={this.state.balance}/>
+            <Balance balance={this.state.balance} />
             <Switch>
+              <Route exact path="/auth" component={Authentication}/>
               <Route exact path="/" 
                 render={(props) => (
                   <Initializer 
@@ -168,7 +190,20 @@ class App extends Component {
                     valuePortion={this.state.valuePortion}
                     simpleBalance={this.state.simpleBalance}
                     checkBalance={this.checkBalance}
+                    type={this.state.type}
                   />  
+                )}
+                />
+                <Route exact path="/transaction/:id" render={props => (
+                  <TransactionFromList 
+                    valueAmount={this.state.valueAmount}
+                    valuePubKey={this.state.valuePubKey}
+                    valueCurrency={this.state.valueCurrency}
+                    valuePortion={this.state.valuePortion}
+                    type={this.state.type}
+                    simpleBalance={this.state.simpleBalance}
+                    formDataForTransaction={this.formDataForTransaction}
+                  />
                 )}
                 />
             </Switch>

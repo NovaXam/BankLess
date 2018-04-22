@@ -11,12 +11,12 @@
     height: 41rem;
 }
 
-.transHeader {
+.transHeaderSuccess {
     margin: 5rem 1rem 2rem;
     max-width: 100%;
 }
 
-.transHeader h4 {
+.transHeaderSuccess h4 {
     color: white;
     background: lightgreen;
     border-radius: 5px;
@@ -29,6 +29,33 @@
     padding: 0rem 1rem;
     max-width: 90%;
     margin: 0 1rem;
+}
 
+.transBodyline {
+    margin: 1rem 0rem;
+    background: rgb(250,247,255);
+}
 
+.transBodyline .left {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.transBodyline .right {
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.transHeaderUnSuccess {
+    margin: 5rem 1rem 2rem;
+    max-width: 100%;
+}
+
+.transHeaderUnSuccess h4 {
+    color: white;
+    background: red;
+    border-radius: 5px;
+    padding: 0.75rem 0;
+    height: 5rem;
+    margin: 0;
 }

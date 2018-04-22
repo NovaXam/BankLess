@@ -69,31 +69,83 @@ class Transaction extends Component {
     render() {
         let color = "black";
         let type = "spinningBubbles";
-        return this.state.transactionResult === null 
-        ?
-        <div className="row no-gutters">
-            <div className="col col-sm-12 loading" style={{padding: "10rem 7rem"}}>
-                <ReactLoading type={type} color={color} height={150} width={150} />
-            </div>
-        </div>
-        :
-        <div className="row no-gutters">
-            <div className="col col-sm-12 loaded">
-                <div className="row no-gutters">
-                    <div className="col col-sm-12 transHeader">
-                        <h4>TRANSACTION SUCCESSFUL!</h4>
-                    </div>
-                </div>
-                <div className="row no-gutters"> 
-                    <div className="col col-sm-12 transBody">
-                        <h5>Recepient: <span>{this.props.valuePubKey}</span></h5>
-                        <h5>Amount: {this.props.valueAmount} <span>{this.props.valueCurrency}</span></h5>
-                        <h5>Portion: {this.props.valuePortion}</h5>
-                        <h5>Balance: {this.props.simpleBalance}</h5>
-                    </div>
+        if (this.state.transactionResult === null) {
+            return (
+            <div className="row no-gutters">
+                <div className="col col-sm-12 loading" style={{padding: "10rem 7rem"}}>
+                    <ReactLoading type={type} color={color} height={150} width={150} />
                 </div>
             </div>
-        </div>
+            )
+        } else if (this.state.transactionResult) {
+            return (
+            <div className="row no-gutters">
+                <div className="col col-sm-12 loaded">
+                    <div className="row no-gutters">
+                        <div className="col col-sm-12 transHeaderSuccess">
+                            <h4>TRANSACTION SUCCESSFUL!</h4>
+                        </div>
+                    </div>
+                    <div className="row no-gutters"> 
+                        <div className="col col-sm-12 transBody">
+                            <div className="row no-gutters transBodyline">
+                                <div className="col col-sm-8 left">
+                                    <h5>Recepient:</h5>
+                                </div>
+                                <div className="col col-sm-4 right">
+                                    <h5>{this.props.valuePubKey.substring(0, 10)}...</h5> 
+                                </div>
+                            </div>
+                            <div className="row no-gutters transBodyline">
+                                <div className="col col-sm-8 left">
+                                    <h5>Amount:</h5>
+                                </div>
+                                <div className="col col-sm-4 right">
+                                    <h5>{this.props.valueAmount} <span>{this.props.valueCurrency}</span></h5>
+                                </div>
+                            </div>
+                            <div className="row no-gutters transBodyline">
+                                <div className="col col-sm-8 left">
+                                    <h5>Portion:</h5>
+                                </div>
+                                <div className="col col-sm-4 right">
+                                    <h5> {this.props.valuePortion}</h5>
+                                </div>
+                            </div>
+                            <div className="row no-gutters transBodyline">
+                                <div className="col col-sm-8 left">
+                                    <h5>Balance:</h5>
+                                </div>
+                                <div className="col col-sm-4 rigth">
+                                <h5> {this.props.simpleBalance} <span>{this.props.valueCurrency}</span> </h5>
+                                </div>
+                            </div>
+                            <div className="row no-gutters transBodyline">
+                                <div className="col col-sm-8 left">
+                                    <h5>Type:</h5>
+                                </div>
+                                <div className="col col-sm-4 right">
+                                    <h5>{this.props.type}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            )
+        } else {
+            return (
+            <div className="row no-gutters">
+                <div className="col col-sm-12 loaded">
+                    <div className="row no-gutters">
+                        <div className="col col-sm-12 transHeaderUnSuccess">
+                            <h4>TRANSACTION UNSUCCESSFUL!</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            )
+        }
     }
 };
 
