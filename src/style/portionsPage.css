@@ -1,0 +1,56 @@
+.portionsPage {
+    height: 41rem;
+}
+
+.addPortion {
+    margin: 4rem 2rem;
+}
+
+.listPortions {
+    margin: 1rem 0rem;
+    height: 27rem;
+    overflow: auto
+
+}
+
+.namePortion h5 {
+    margin: 0;
+}
+
+.namePortionClosed {
+    text-align: left;
+    padding: 0.5rem 0rem;
+    height: 3rem;
+    transition: height 2s;
+}
+
+.namePortionOpened {
+    text-align: left;
+    padding: 0.5rem 0rem;
+    height: 13rem;
+    transition: height 2s;
+}
+
+.namePortionOpened h6 {
+    font-size: 14px;
+}
+
+.balancePortion {
+    text-align: right;
+    padding: 0.5rem 0rem;
+}
+
+.lineHeader {
+    background: rgba(235,244,225,0.9);
+    border-top: 2px solid lightgray;
+    height: 2rem;
+    font-weight: 700;
+}
+
+.portionInHere {
+    overflow: hidden;
+}
+
+.firstLine {
+    margin: 0rem 1rem;
+}

@@ -10,6 +10,7 @@ import BottomMenu from './components/BottomMenu';
 import PaymentForm from './components/PaymentForm';
 import Transaction from './components/Transaction';
 import Initializer from './components/Initializer';
+import PortionsPage from './components/PortionsPage';
 
 import TransactionFromList from './components/TransactionFromList';
 import Authentication from './components/Authentication';
@@ -209,10 +210,12 @@ class App extends Component {
                   />
                 )}
                 />
-                  />
-                )}
-                />
               <Route exact path="/test" component={Blockstack} />
+              <Route exact path="/Portion" render={props => (
+                  <PortionsPage 
+                  />
+              )}
+              />
             </Switch>
             <BottomMenu botomMenuList={this.state.botomMenuList}/>
           </div>

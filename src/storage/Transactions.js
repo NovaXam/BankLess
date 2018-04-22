@@ -6,6 +6,7 @@ export const Transactions = [
         type: "credit",
         amount: 387.00,
         balance: 9870,
+        date: "03-13-2018",
         portion: "Mortage"
     },
     {

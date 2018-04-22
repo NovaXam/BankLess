@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import "../style/trasactionFromList.css";
 
@@ -20,7 +21,7 @@ class TrasactionFromList extends Component {
             elemBut = (
             <div className="row no-gutters buttonList">
                 <div className="col col-sm-12">
-                    <button className="btn btn-success">Customize transaction</button>
+                    <Link to="/Portion"><button className="btn btn-success">Customize transaction</button></Link>
                 </div>
             </div>);
         } else {
