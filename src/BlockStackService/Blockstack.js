@@ -55,9 +55,7 @@ class Blockstack extends Component {
   handleSignIn(e) {
     e.preventDefault();
     const origin = window.location.origin;
-    console.log(origin);
-    const redirectURI = `${origin}/test`;
-    redirectToSignIn(redirectURI, `${origin}/manifest.json`, ['store_write', 'publish_data']);
+    redirectToSignIn(origin, `${origin}/manifest.json`, ['store_write', 'publish_data']);
   }
 
   handleSignOut(e) {
