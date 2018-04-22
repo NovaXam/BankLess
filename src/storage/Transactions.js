@@ -28,7 +28,7 @@ export const Transactions = [
         portion: "Parents"
     },
     {
-        id: "fadf090", 
+        id: "fadf090",
         publicKey: "PBRSJFLASFADSF896222VASDF453",
         currency: "BTC",
         type: "credit",
@@ -56,7 +56,7 @@ export const Transactions = [
         portion: "Gifts"
     },
     {
-        id: "90r54230fdsa",
+        id: "90r54210fdsa",
         publicKey: "JHGHJFDDJFLASFADSF896222VASDF453",
         currency: "BTC",
         type: "credit",
@@ -65,7 +65,7 @@ export const Transactions = [
         portion: "Tips"
     },
     {
-        id: "90r54230fdsa",
+        id: "90r54238fdsa",
         publicKey: "UYEQV<JFLASFADSF896222VASDF453",
         currency: "BTC",
         type: "debit",
@@ -74,7 +74,7 @@ export const Transactions = [
         portion: undefined
     },
     {
-        id: "90r54230fdsa",
+        id: "90954230fdsa",
         publicKey: "POMNFJFLASFADSF896222VASDF453",
         currency: "BTC",
         type: "credit",
@@ -83,7 +83,7 @@ export const Transactions = [
         portion: "Tips"
     },
     {
-        id: "90r54230fdsa",
+        id: "90r54030fdsa",
         publicKey: "NUUTPJFLASFADSF896222VASDF453",
         currency: "BTC",
         type: "debit",
