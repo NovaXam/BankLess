@@ -46,7 +46,7 @@ class Storage extends Component {
 
     return (
       <div>
-        <h3 className="card-title">Crypto Snapshot</h3>
+        <h3 className="card-title">Crypto Stats</h3>
         <p className="card-text">Consolidated Summary</p>
         {  currList }
       </div>
